@@ -7,12 +7,14 @@
     <version>0.0.1</version>
     <packaging>jar</packaging>
 
+
     <name>A custom project</name>
     <url>http://www.featureflow.io</url>
 
     <properties>
         <javaVersion>1.8</javaVersion>
         <junit.version>4.12</junit.version>
+        <jacoco.version>0.8.8</jacoco.version>
     </properties>
 
    
@@ -72,6 +74,28 @@
                                 </transformer>
                             </transformers>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <!-- Prepares the property pointing to the JaCoCo runtime agent
+                    which is passed as VM argument when Maven the Surefire plugin is executed. -->
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <!-- Ensures that the code coverage report is created after
+                    all tests have been run. -->
+                    <execution>
+                        <id>generate-report</id>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
