@@ -35,7 +35,6 @@ jobs:
         name: Package
         path: staging
     - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v1
-      file: ./**/target/site/jacoco/jacoco.xml
+      uses: codecov/codecov-action@v3
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
