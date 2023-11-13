@@ -29,7 +29,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml -P coverage
-    - run: mkdir staging && cp target/*.jar staging
+    - run: mkdir staging && cp target/*.war staging
     - uses: actions/upload-artifact@v3
       with:
         name: Package
@@ -48,3 +48,24 @@ jobs:
         REMOTE_HOST: ${{ secrets.HOST_DNS }}
         REMOTE_USER: ${{ secrets.USERNAME }}
         TARGET: ${{ secrets.TARGET_DIR }}
+    - name: AWS SSM Send-Command
+      uses: peterkimzz/aws-ssm-send-command@master
+      id: ssm
+      with:
+        aws-region: ${{ secrets.AWS_REGION }}
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        instance-ids: ${{ secrets.INSTANCE_ID }}
+        working-directory: /home/ec2-user
+        command: |
+          cd /home/ec2-user/
+          mkdir opt
+          cd opt
+          mkdir jdk-17
+          cd jdk-17
+          wget https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
+          tar xvf openjdk-17.0.2_linux-x64_bin.tar.gz
+          export JAVA_HOME=/home/ec2-user/opt/jdk-17/jdk-17.0.2/
+          export PATH=$PATH:$JAVA_HOME/bin
+          cd /home/ec2-user/opt/jdk-17/jdk-17.0.2/target
+          java -jar pipelineProject*.jar
