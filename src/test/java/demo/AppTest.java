@@ -1,5 +1,6 @@
 package demo;
 
+import demo.controller.HelloController;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -7,14 +8,16 @@ import org.junit.Test;
 public class AppTest {
 
     @Test
-    public void testSumSuccess() {
-        App appTest = new App();
-        Assert.assertTrue(appTest.sumAmount(7, 11) == 18);
+    public void welcomeTestSuccess() {
+        HelloController controller = new HelloController();
+        Assert.assertNotNull(controller.welcome("Cristiana"));
     }
+
     @Test
-    public void testSum() {
-        App appTest = new App();
-        Assert.assertFalse(appTest.sumAmount(7, 11) == 11);
+    public void welcomeTestUnsuccessful() {
+        HelloController controller = new HelloController();
+        Assert.assertNull(controller.welcome(null));
     }
+
 }
 
