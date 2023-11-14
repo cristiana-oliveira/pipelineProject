@@ -12,7 +12,7 @@ public class HelloController {
     @GetMapping("/hello")
     public String welcome(@RequestParam String name) {
         if (name == null) {
-            throw new RuntimeException("Missing name");
+           return null;
         } else {
            return String.format("Hello %s, welcome to my application!", name);
         }
