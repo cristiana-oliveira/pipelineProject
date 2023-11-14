@@ -75,5 +75,5 @@ jobs:
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
     - run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
     - run: |
-           postman collection run "${{ github.workspace }}/postman/collections/Integration Testing.json"
+           postman collection run "17214402-524ffeb1-6996-4c3f-bd93-82390a160071"
       
