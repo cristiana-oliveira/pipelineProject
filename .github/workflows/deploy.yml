@@ -69,6 +69,7 @@ jobs:
           export PATH=$PATH:$JAVA_HOME/bin
           cd /home/ec2-user/web-apps/target
           java -jar pipelineProject*.jar
+        wait-interval: 20
     - name: Install Postman CLI
       uses: actions/checkout@v3
     - run: |
