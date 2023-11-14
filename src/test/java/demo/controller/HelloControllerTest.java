@@ -1,11 +1,9 @@
-package demo;
+package demo.controller;
 
-import demo.controller.HelloController;
 import org.junit.Assert;
 import org.junit.Test;
 
-
-public class AppTest {
+public class HelloControllerTest {
 
     @Test
     public void welcomeTestSuccess() {
@@ -18,6 +16,4 @@ public class AppTest {
         HelloController controller = new HelloController();
         Assert.assertNull(controller.welcome(null));
     }
-
 }
-

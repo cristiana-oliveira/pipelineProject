@@ -69,3 +69,17 @@ jobs:
           export PATH=$PATH:$JAVA_HOME/bin
           cd /home/ec2-user/web-apps/target
           java -jar pipelineProject*.jar
+    automated-api-tests:
+         runs-on: ubuntu-latest
+         steps:
+           - uses: actions/checkout@v3
+           - name: Install Postman CLI
+             run: |
+               curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+           - name: Login to Postman CLI
+             run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+           - name: Run API tests
+             run: |
+               # Lint your API using Postman CLI
+               postman api lint 6b1a494d-60ee-4c62-b738-43584b173a2c
+      

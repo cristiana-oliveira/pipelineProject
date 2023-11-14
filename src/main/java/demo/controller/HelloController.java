@@ -14,7 +14,8 @@ public class HelloController {
         if (name == null) {
             return null;
         } else {
-            return String.format("Hello %s, welcome to my application!", name);
+            return "<html><head></head><body><h2>Welcome</h2></body></html>";
+            //return String.format("Hello %s, welcome to my application!", name);
         }
     }
 }
